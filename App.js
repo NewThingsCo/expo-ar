@@ -22,6 +22,29 @@ export default class CameraExample extends React.Component {
     if (hasCameraPermission === null) return <View />
     if (hasCameraPermission === false) return <Text>No access to camera</Text>
 
+    const faceExpression = smilingProbability => {
+      const emoji = smilingProbability > 0.5 ? '😊' : '😐'
+      return <Text style={{fontSize: 25}}>{emoji}</Text>
+    }
+
+    const faceBoundaries = faces.map((face, index) => {
+      const {bounds: {origin, size}, smilingProbability} = face
+      return (
+        <View key={index} style={{
+          position: 'absolute',
+          top: origin.y,
+          left: origin.x,
+          width: size.width,
+          height: size.height,
+          borderWidth: 1,
+          borderColor: 'yellow',
+          borderStyle: 'solid'
+        }}>
+          { faceExpression(smilingProbability) }
+        </View>
+      )
+    })
+
     return (
       <View style={{ flex: 1 }}>
         <Camera
@@ -29,23 +52,10 @@ export default class CameraExample extends React.Component {
           type={Camera.Constants.Type.front}
           faceDetectionMode={Camera.Constants.FaceDetection.Mode.fast}
           faceDetectionLandmarks={Camera.Constants.FaceDetection.Landmarks.none}
-          faceDetectionClassifications={Camera.Constants.FaceDetection.Classifications.none}
+          faceDetectionClassifications={Camera.Constants.FaceDetection.Classifications.all}
           onFacesDetected={this.onFacesDetected.bind(this)}
         />
-        {
-          faces.map(({bounds: {origin, size}}, index) =>
-            <View key={index} style={{
-              position: 'absolute',
-              top: origin.y,
-              left: origin.x,
-              width: size.width,
-              height: size.height,
-              borderWidth: 1,
-              borderColor: 'yellow',
-              borderStyle: 'solid'
-            }} />
-          )
-        }
+        { faceBoundaries }
       </View>
     )
   }
