@@ -8,7 +8,7 @@ In this exercise we render an image on top of the detected face
 
 Create subfolder src/Glasses. In that folder, create file index.js.
 
-## Step 2: implement component with embedded image
+## Step 2: Implement component with embedded image
 
 *src/Glasses/index.js*
 ```JavaScript
@@ -56,12 +56,12 @@ export default Mask
 
 ```
 
-## Step 3: take new component in use
+## Step 3: Take new component in use
 
 In your app Main view (src/index.js), replace use of Mask-component with newly created Glasses-component.
 Check [exercise 3](ex3.md#step-3-integrate-mask-to-main-view) for details how to do this.
 
-## Step 4: test and enhance
+## Step 4: Test and enhance
 
 Test the implementation.
 

@@ -32,7 +32,7 @@ export default MainView
 
 Now you have a stateful React component in which you can implement the needed functionality.
 
-# Step 2: Ask camera permission
+## Step 2: Ask camera permission
 
 Ask Camera permission in the component initialisation phase.
 
